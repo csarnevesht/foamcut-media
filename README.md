@@ -16,14 +16,18 @@ Do not put these binaries back in the main `foamCut` repo.
 - `videos/loops/`
 - `showcase/` — spiral / Chubby Fish proof assets
 
-## Update from foamCut
+## Publish a video
 
-After publishing a new MP4 in `store/public/videos`:
+1. Put the media file at its final relative path under `videos/` or `showcase/`.
+2. Commit and push this repository. GitHub is the archival source of truth.
+3. Upload the same path to R2:
 
-```bash
-cd /path/to/foamCut
-npm run media:push-repo
-npm run media:sync-r2    # after wrangler login, until GitHub Action secrets are set
-```
+   ```bash
+   npx wrangler r2 object put foamcut-media/videos/demos/your-video.mp4 \
+     --file videos/demos/your-video.mp4 \
+     --remote
+   ```
 
-See `docs/deployment/media-r2.md` in foamCut for the Cloudflare/R2 dashboard steps.
+4. Confirm `https://media.foamcut.io/videos/demos/your-video.mp4` responds before adding an app link.
+
+See `docs/deployment/media-r2.md` in `foamCut` for the complete delivery, cache, and offline-installer process.
